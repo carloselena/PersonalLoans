@@ -11,4 +11,8 @@
       <ProjectReference Include="..\Lending.Domain\Lending.Domain.csproj" />
     </ItemGroup>
 
+    <ItemGroup>
+      <Folder Include="Features\Loans\Commands\RegisterPayment\" />
+    </ItemGroup>
+
 </Project>

@@ -1,6 +1,7 @@
 ﻿using Blocks.Domain.Abstractions;
 using Lending.Application.Features.Loans.Queries;
 using Lending.Domain.Loans;
+using Lending.Persistence.Queries;
 using Lending.Persistence.Repositories;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
@@ -22,6 +23,6 @@ public static class ServiceRegistration
 
         services.AddScoped<IUnitOfWork, LendingUnitOfWork>();
         services.AddScoped<ILoanRepository, LoanRepository>();
-        services.AddScoped<ILoanQueries, ILoanQueries>();
+        services.AddScoped<ILoanQueries, LoanQueries>();
     }
 }

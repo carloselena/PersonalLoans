@@ -16,7 +16,7 @@ public static class CreateOneTimePaymentLoanEndpoint
             ISender sender,
             CancellationToken cancellationToken) =>
         {
-            var loanId = sender.Send(command, cancellationToken);
+            var loanId = await sender.Send(command, cancellationToken);
             return Results.Created($"/loans/one-time/{loanId}", loanId);
         })
         .WithName("CreateOneTimePaymentLoan")

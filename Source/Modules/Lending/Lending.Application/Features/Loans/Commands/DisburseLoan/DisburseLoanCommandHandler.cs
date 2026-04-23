@@ -1,6 +1,7 @@
 ﻿using Blocks.Application.Abstractions;
 using Blocks.Application.Exceptions;
 using Blocks.Domain.Abstractions;
+using Blocks.Domain.Time;
 using Lending.Application.Features.Loans.Dtos;
 using Lending.Application.Features.Loans.Queries;
 using Lending.Domain.Loans;
@@ -10,14 +11,12 @@ namespace Lending.Application.Features.Loans.Commands.DisburseLoan;
 
 public class DisburseLoanCommandHandler : IRequestHandler<DisburseLoanCommand, LoanDto>
 {
-    private readonly ILoanQueries _queries;
     private readonly ILoanRepository _repository;
     private readonly ICurrentUser _currentUser;
     private readonly IUnitOfWork _unitOfWork;
 
-    public DisburseLoanCommandHandler(ILoanQueries queries, ILoanRepository repository, ICurrentUser currentUser, IUnitOfWork unitOfWork)
+    public DisburseLoanCommandHandler(ILoanRepository repository, ICurrentUser currentUser, IUnitOfWork unitOfWork)
     {
-        _queries = queries;
         _repository = repository;
         _currentUser = currentUser;
         _unitOfWork = unitOfWork;
@@ -28,7 +27,7 @@ public class DisburseLoanCommandHandler : IRequestHandler<DisburseLoanCommand, L
         if (loan is null)
             throw new NotFoundException("Préstamo no encontrado");
 
-        loan.Disburse(DateTimeOffset.UtcNow);
+        loan.Disburse(DateProvider.UtcNow());
 
         await _unitOfWork.CommitAsync(cancellationToken);
         return loan.ToDto();
