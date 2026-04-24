@@ -2,7 +2,7 @@
 using Blocks.Domain.ValueObjects;
 using Lending.Domain.Loans.Penalties;
 
-namespace Lending.Tests.Domain.Loans.Penalties;
+namespace Lending.UnitTests.Domain.Loans.Penalties;
 
 public class PenaltyTests
 {

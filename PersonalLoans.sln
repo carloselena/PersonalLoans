@@ -25,7 +25,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Modules", "Modules", "{C334
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Lending", "Lending", "{24744394-FE2A-4B9C-B641-DF88925E6966}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Lending.Tests", "Tests\Modules\Lending\Lending.Tests\Lending.Tests.csproj", "{EC24224E-597A-4D2B-A81F-EC0095525D92}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Lending.UnitTests", "Tests\Modules\Lending\Lending.UnitTests\Lending.UnitTests.csproj", "{EC24224E-597A-4D2B-A81F-EC0095525D92}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Lending.Persistence", "Source\Modules\Lending\Lending.Persistence\Lending.Persistence.csproj", "{EF3912C0-EE7A-4B1B-841D-9C9151B3F70F}"
 EndProject

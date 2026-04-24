@@ -3,7 +3,7 @@ using Blocks.Domain.Exceptions;
 using Blocks.Domain.ValueObjects;
 using Lending.Domain.Loans.Installments;
 
-namespace Lending.Tests.Domain.Loans.Installments;
+namespace Lending.UnitTests.Domain.Loans.Installments;
 
 public class InstallmentTests
 {

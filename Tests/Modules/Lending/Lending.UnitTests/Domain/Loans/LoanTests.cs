@@ -4,7 +4,7 @@ using Blocks.Domain.ValueObjects;
 using Lending.Domain.Loans;
 using Lending.Domain.Loans.ValueObjects;
 
-namespace Lending.Tests.Domain.Loans;
+namespace Lending.UnitTests.Domain.Loans;
 
 public class LoanTests
 {
