@@ -19,19 +19,11 @@ public sealed record Money
         Currency = currency;
     }
     
-    public static Money FromDecimal(decimal amount)
-    {
-        var rounded = Math.Round(amount, 2, MidpointRounding.AwayFromZero);
-        return new Money(rounded);
-    }
-    
-    public static Money Zero(Currency currency = Currency.DOP) 
+    public static Money Zero(Currency currency = Currency.DOP)
         => new(0, currency);
     
     public static explicit operator decimal(Money money)
-    {
-        return money.Amount;
-    }
+        => money.Amount;
 
     public static Money operator +(Money a, Money b)
     {

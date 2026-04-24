@@ -26,7 +26,7 @@ public class LoanEntityConfiguration : IEntityTypeConfiguration<Loan>
                 "disbursed_at IS NULL OR disbursed_at >= created_at");
             
             t.HasCheckConstraint("ck_loans_one_time_due_date_after_created",
-                "one_time_due_date IS NULL OR one_time_due_date >= created_at");
+                "one_time_due_date IS NULL OR one_time_due_date >= created_at::date");
             
             t.HasCheckConstraint("ck_loans_payment_frequency_valid",
                 "payment_frequency IN ('Daily','Weekly','BiWeekly','Monthly','OneTime')");

@@ -10,7 +10,7 @@
       <ProjectReference Include="..\..\..\BuildingBlocks\Blocks.Domain\Blocks.Domain.csproj" />
     </ItemGroup>
     <ItemGroup>
-        <InternalsVisibleTo Include="Lending.Tests" />
+        <InternalsVisibleTo Include="Lending.UnitTests" />
     </ItemGroup>
 
 </Project>

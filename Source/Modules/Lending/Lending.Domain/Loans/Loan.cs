@@ -175,7 +175,8 @@ public class Loan : AggregateRoot
             
             remaining = installement.ApplyPayment(remaining);
         }
-
+        
+        UpdateStatus();
     }
     public bool AccrueDailyPenalties(DateOnly today)
     {
@@ -288,9 +289,13 @@ public class Loan : AggregateRoot
     
     private Penalty? GetPenaltyForInstallment(int installmentNumber)
         => _penalties.FirstOrDefault(p => p.InstallmentNumber == installmentNumber);
-    
+
     private static Money CalculateDailyPenalty(Money overdueAmount, decimal dailyRate)
-        => Money.FromDecimal(overdueAmount.Amount * dailyRate);
+    {
+        var amount = Math.Round((decimal)overdueAmount * dailyRate, 2, MidpointRounding.AwayFromZero);
+        const decimal minimum = 1.00m;
+        return new Money(Math.Max(amount, minimum), overdueAmount.Currency);
+    }
     
     #endregion
 }

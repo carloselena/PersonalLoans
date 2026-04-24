@@ -4,7 +4,7 @@ using Blocks.Domain.ValueObjects;
 using Lending.Domain.Loans;
 using Lending.Domain.Loans.ValueObjects;
 
-namespace Lending.Tests.Domain.Loans;
+namespace Lending.UnitTests.Domain.Loans;
 
 public class LoanTests
 {
@@ -51,7 +51,7 @@ public class LoanTests
     public void CreateNormal_WithOneTimeFrequency_ShouldThrow()
     {
         // Act & Assert
-        Assert.Throws<DomainException>(() =>
+        Assert.Throws<BusinessRuleViolationException>(() =>
             Loan.CreateNormal(_clientId, _principal, _interestRate, _penaltyInterestRate, _term, _oneTime, _createdAt));
     }
 
@@ -96,7 +96,7 @@ public class LoanTests
         loan.Disburse(_disbursedAt);
 
         // Act & Assert
-        Assert.Throws<DomainException>(() => loan.Disburse(_disbursedAt));
+        Assert.Throws<BusinessRuleViolationException>(() => loan.Disburse(_disbursedAt));
     }
 
     // ===== Installments =====

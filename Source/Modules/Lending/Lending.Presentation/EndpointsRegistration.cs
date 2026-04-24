@@ -12,6 +12,7 @@ public static class EndpointsRegistration
             .MapCreateNormalLoanEndpoint()
             .MapCreateOneTimePaymentLoanEndpoint()
             .MapPreviewNormalLoanEndpoint()
+            .MapDisburseLoanEndpoint()
             .MapGetAllLoansEndpoint()
             .MapGetLoanByIdEndpoint()
             ;
