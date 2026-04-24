@@ -37,10 +37,10 @@ public class PenaltyTests
         var date = new DateOnly(2026, 1, 1);
 
         // Act & Assert
-        Assert.Throws<DomainException>(() =>
+        Assert.Throws<InvalidDomainValueException>(() =>
             Penalty.Create(1, new Money(0), date));
 
-        Assert.Throws<ArgumentException>(() =>
+        Assert.Throws<InvalidDomainValueException>(() =>
             Penalty.Create(1, new Money(-10), date));
     }
 
@@ -70,7 +70,7 @@ public class PenaltyTests
         var sameDay = new DateOnly(2026, 1, 1);
 
         // Act & Assert
-        Assert.Throws<DomainException>(() =>
+        Assert.Throws<BusinessRuleViolationException>(() =>
             penalty.Accrue(new Money(50), sameDay));
     }
 
@@ -144,7 +144,7 @@ public class PenaltyTests
         penalty.ApplyPayment(new Money(100));
 
         // Act & Assert
-        Assert.Throws<DomainException>(() =>
+        Assert.Throws<BusinessRuleViolationException>(() =>
             penalty.ApplyPayment(new Money(10)));
     }
 
