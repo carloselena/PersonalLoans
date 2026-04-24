@@ -20,7 +20,7 @@ public sealed record InterestRate
         Guard.AgainstNegativeDecimal(rate, "tasa");
         
         // todo - considerar moverlo a un guard
-        if (rate > 1)
+        if (rate >= 1)
             throw new InvalidDomainValueException("La tasa de interés debe ser menor a 1 (ejemplo: 0.20 para 20%");
 
         Rate = rate;

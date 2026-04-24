@@ -8,7 +8,7 @@ public sealed record Term
     
     private Term(int value)
     {
-        Guard.AgainstNegativeDecimal(value, "cuota");
+        Guard.AgainstNegativeOrZeroInt(value, "cuota");
         Value = value;
     }
     
