@@ -3,6 +3,7 @@ using Lending.Application.Features.Loans.Dtos;
 using MediatR;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Routing;
 
 namespace Lending.Presentation.Endpoints.Loans;
@@ -12,7 +13,7 @@ public static class DisburseLoanEndpoint
     public static IEndpointRouteBuilder MapDisburseLoanEndpoint(this IEndpointRouteBuilder app)
     {
         app.MapPost("loans/{id:guid}/disburse", async (
-            Guid id,
+            [FromRoute] Guid id,
             ISender sender,
             CancellationToken cancellationToken
         ) =>

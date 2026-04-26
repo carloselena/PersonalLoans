@@ -2,6 +2,7 @@
 using MediatR;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Routing;
 
 namespace Lending.Presentation.Endpoints.Loans;
@@ -11,7 +12,7 @@ public static class PreviewNormalLoanEndpoint
     public static IEndpointRouteBuilder MapPreviewNormalLoanEndpoint(this IEndpointRouteBuilder app)
     {
         app.MapPost("loans/normal/preview", async (
-                PreviewNormalLoanQuery request,
+                [FromBody] PreviewNormalLoanQuery request,
                 ISender sender,
                 CancellationToken cancellationToken) =>
             {

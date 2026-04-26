@@ -2,6 +2,7 @@
 using MediatR;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Routing;
 
 namespace Lending.Presentation.Endpoints.Loans;
@@ -11,7 +12,7 @@ public static class GetAllLoansEndpoint
     public static IEndpointRouteBuilder MapGetAllLoansEndpoint(this IEndpointRouteBuilder app)
     {
         app.MapGet("loans/", async (
-            GetAllLoansQuery request,
+            [AsParameters] GetAllLoansQuery request,
             ISender sender,
             CancellationToken cancellationToken
             ) =>
