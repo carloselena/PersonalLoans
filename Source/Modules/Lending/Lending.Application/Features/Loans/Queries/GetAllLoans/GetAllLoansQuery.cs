@@ -1,5 +1,4 @@
-﻿using Lending.Domain.Loans;
-using MediatR;
+﻿using MediatR;
 
 namespace Lending.Application.Features.Loans.Queries.GetAllLoans;
 
