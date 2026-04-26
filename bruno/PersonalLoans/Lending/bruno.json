@@ -1,0 +1,9 @@
+{
+  "version": "1",
+  "name": "Lending",
+  "type": "collection",
+  "ignore": [
+    "node_modules",
+    ".git"
+  ]
+}
