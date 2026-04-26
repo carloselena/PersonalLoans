@@ -1,0 +1,12 @@
+opencollection: 1.0.0
+info:
+  name: "PersonalLoans"
+  type: workspace
+
+collections:
+  - name: "Lending"
+    path: "Lending"
+
+specs:
+
+docs: ''

@@ -1,0 +1,16 @@
+meta {
+  name: GetAllLoans
+  type: http
+  seq: 1
+}
+
+get {
+  url: {{baseUrl}}/loans
+  body: none
+  auth: inherit
+}
+
+settings {
+  encodeUrl: true
+  timeout: 0
+}
