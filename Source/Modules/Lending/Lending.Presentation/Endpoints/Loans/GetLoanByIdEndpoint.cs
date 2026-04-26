@@ -3,6 +3,7 @@ using Lending.Application.Features.Loans.Queries.GetLoanById;
 using MediatR;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Routing;
 
 namespace Lending.Presentation.Endpoints.Loans;
@@ -12,12 +13,12 @@ public static class GetLoanByIdEndpoint
     public static IEndpointRouteBuilder MapGetLoanByIdEndpoint(this IEndpointRouteBuilder app)
     {
         app.MapGet("loans/{id:guid}", async (
-            GetLoanByIdQuery request,
+            [FromRoute] Guid id,
             ISender sender,
             CancellationToken cancellationToken
         ) =>
         {
-            var result = await sender.Send(request, cancellationToken);
+            var result = await sender.Send(new GetLoanByIdQuery(id), cancellationToken);
             return Results.Ok(result);
         })
         .WithName("GetLoanById")

@@ -15,6 +15,7 @@ public class Installment
 
     public Money AmountPaid { get; private set; }
     public Money AmountOwed => Amount - AmountPaid;
+    public Money InterestPaid => AmountPaid > Interest ? Interest : AmountPaid;
     
     public InstallmentStatus Status =>
         AmountPaid >= Amount ? InstallmentStatus.Paid : InstallmentStatus.Pending;
@@ -40,15 +41,20 @@ public class Installment
 
     internal Money ApplyPayment(Money payment)
     {
-        if (Status == InstallmentStatus.Paid)
-            throw new BusinessRuleViolationException("No se puede pagar una cuota que ya está saldada");
-        
-        if (payment <= Money.Zero(Amount.Currency))
-            throw new InvalidDomainValueException("El pago de la cuota debe ser mayor a cero");
+        GuardPayment(payment);
 
         var applied = payment > AmountOwed ? AmountOwed : payment;
         AmountPaid += applied;
         
         return payment - applied;
+    }
+
+    private void GuardPayment(Money payment)
+    {
+        if (Status == InstallmentStatus.Paid)
+            throw new BusinessRuleViolationException("No se puede pagar una cuota que ya está saldada");
+        
+        if (payment <= Money.Zero(Amount.Currency))
+            throw new InvalidDomainValueException("El pago de la cuota debe ser mayor a cero");
     }
 }
