@@ -5,6 +5,17 @@ namespace Blocks.Domain.Guards;
 
 public static class Guard
 {
+    public static void AgainstNullOrWhiteSpace(string value, string propertyName)
+    {
+        if (string.IsNullOrWhiteSpace(value))
+            throw new InvalidDomainValueException($"{propertyName} debe tener al menos un carácter");
+    }
+    
+    public static void AgainstEmptyGuid(Guid value, string propertyName)
+    {
+        if (value == Guid.Empty)
+            throw new InvalidDomainValueException($"{propertyName} no puede ser un Guid vacío");
+    }
     public static void AgainstNegativeOrZeroInt(int value, string propertyName)
     {
         if (value <= 0)

@@ -12,6 +12,8 @@ public class LendingDbContext(DbContextOptions<LendingDbContext> options) : DbCo
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
         base.OnModelCreating(modelBuilder);
+        
+        modelBuilder.HasDefaultSchema("lending");
         modelBuilder.ApplyConfigurationsFromAssembly(GetType().Assembly);
     }
 }

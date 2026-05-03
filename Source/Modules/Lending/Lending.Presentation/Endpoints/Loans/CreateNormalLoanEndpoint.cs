@@ -1,5 +1,4 @@
-﻿using Lending.Application.Features.Loans.Commands;
-using Lending.Application.Features.Loans.Commands.CreateNormalLoan;
+﻿using Lending.Application.Features.Loans.Commands.CreateNormalLoan;
 using MediatR;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Http;

@@ -1,5 +1,6 @@
 ﻿using Blocks.Domain.Abstractions;
 using Blocks.Domain.Time;
+using Lending.Domain;
 using Lending.Domain.Loans;
 using MediatR;
 
@@ -8,9 +9,9 @@ namespace Lending.Application.Features.Loans.Commands.AccrueDailyPenalties;
 public sealed class AccrueDailyPenaltiesCommandHandler : IRequestHandler<AccrueDailyPenaltiesCommand, AccrueDailyPenaltiesResult>
 {
     private readonly ILoanRepository _loanRepository;
-    private readonly IUnitOfWork _unitOfWork;
+    private readonly ILendingUnitOfWork _unitOfWork;
 
-    public AccrueDailyPenaltiesCommandHandler(ILoanRepository loanRepository, IUnitOfWork unitOfWork)
+    public AccrueDailyPenaltiesCommandHandler(ILoanRepository loanRepository, ILendingUnitOfWork unitOfWork)
     {
         _loanRepository = loanRepository;
         _unitOfWork = unitOfWork;

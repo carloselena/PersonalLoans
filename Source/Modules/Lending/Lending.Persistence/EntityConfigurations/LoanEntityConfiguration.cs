@@ -9,7 +9,7 @@ public class LoanEntityConfiguration : IEntityTypeConfiguration<Loan>
 {
     public void Configure(EntityTypeBuilder<Loan> builder)
     {
-        builder.ToTable("loans", "lending", t =>
+        builder.ToTable("loans", t =>
         {
             t.HasCheckConstraint("ck_loans_term_positive", "term > 0");
             
@@ -162,7 +162,7 @@ public class LoanEntityConfiguration : IEntityTypeConfiguration<Loan>
 
         builder.OwnsMany(l => l.Installments, installment =>
         {
-            installment.ToTable("installments", "lending", t =>
+            installment.ToTable("installments", t =>
             {
                 t.HasCheckConstraint("ck_installments_number_positive", "number > 0");
                 
@@ -256,7 +256,7 @@ public class LoanEntityConfiguration : IEntityTypeConfiguration<Loan>
 
         builder.OwnsMany(l => l.Penalties, penalty =>
         {
-            penalty.ToTable("penalties", "lending", t =>
+            penalty.ToTable("penalties", t =>
             {
                 t.HasCheckConstraint("ck_penalties_amount_positive", "amount > 0");
 
