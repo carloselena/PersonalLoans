@@ -1,5 +1,5 @@
-﻿using Blocks.Domain.Abstractions;
-using Lending.Application.Features.Loans.Queries;
+﻿using Lending.Application.Features.Loans.Queries;
+using Lending.Domain;
 using Lending.Domain.Loans;
 using Lending.Persistence.Queries;
 using Lending.Persistence.Repositories;
@@ -16,12 +16,15 @@ public static class ServiceRegistration
         var connectionString = configuration.GetConnectionString("DefaultConnection");
 
         services.AddDbContext<LendingDbContext>(options =>
-            options.UseNpgsql(connectionString, b =>
-                b.MigrationsAssembly(typeof(LendingDbContext).Assembly.FullName)
-            )
+            {
+                options.UseNpgsql(connectionString, b =>
+                    b.MigrationsAssembly(typeof(LendingDbContext).Assembly.FullName))
+                .UseSnakeCaseNamingConvention();
+            }
+            
         );
 
-        services.AddScoped<IUnitOfWork, LendingUnitOfWork>();
+        services.AddScoped<ILendingUnitOfWork, LendingUnitOfWork>();
         services.AddScoped<ILoanRepository, LoanRepository>();
         services.AddScoped<ILoanQueries, LoanQueries>();
     }

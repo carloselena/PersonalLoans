@@ -17,4 +17,8 @@
       <PackageReference Include="MediatR" Version="12.5.0" />
     </ItemGroup>
 
+    <ItemGroup>
+      <ProjectReference Include="..\Blocks.IntegrationEvents\Blocks.IntegrationEvents.csproj" />
+    </ItemGroup>
+
 </Project>

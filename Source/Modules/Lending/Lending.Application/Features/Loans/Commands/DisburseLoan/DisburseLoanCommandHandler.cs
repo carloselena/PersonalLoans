@@ -4,6 +4,7 @@ using Blocks.Domain.Abstractions;
 using Blocks.Domain.Time;
 using Lending.Application.Features.Loans.Dtos;
 using Lending.Application.Features.Loans.Queries;
+using Lending.Domain;
 using Lending.Domain.Loans;
 using MediatR;
 
@@ -13,9 +14,9 @@ public class DisburseLoanCommandHandler : IRequestHandler<DisburseLoanCommand, L
 {
     private readonly ILoanRepository _repository;
     private readonly ICurrentUser _currentUser;
-    private readonly IUnitOfWork _unitOfWork;
+    private readonly ILendingUnitOfWork _unitOfWork;
 
-    public DisburseLoanCommandHandler(ILoanRepository repository, ICurrentUser currentUser, IUnitOfWork unitOfWork)
+    public DisburseLoanCommandHandler(ILoanRepository repository, ICurrentUser currentUser, ILendingUnitOfWork unitOfWork)
     {
         _repository = repository;
         _currentUser = currentUser;

@@ -13,15 +13,16 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace Lending.Persistence.Migrations
 {
     [DbContext(typeof(LendingDbContext))]
-    [Migration("20260425234450_LenderIdIndexOnLoans")]
-    partial class LenderIdIndexOnLoans
+    [Migration("20260501042130_InitialMigration")]
+    partial class InitialMigration
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "10.0.5")
+                .HasDefaultSchema("lending")
+                .HasAnnotation("ProductVersion", "10.0.7")
                 .HasAnnotation("Relational:MaxIdentifierLength", 63);
 
             NpgsqlModelBuilderExtensions.UseIdentityByDefaultColumns(modelBuilder);
@@ -145,16 +146,21 @@ namespace Lending.Persistence.Migrations
                                 .HasColumnOrder(8);
                         });
 
-                    b.HasKey("Id");
+                    b.HasKey("Id")
+                        .HasName("pk_loans");
 
-                    b.HasIndex("CreatedAt");
+                    b.HasIndex("CreatedAt")
+                        .HasDatabaseName("ix_loans_created_at");
 
                     b.HasIndex("DisbursedAt")
+                        .HasDatabaseName("ix_loans_disbursed_at")
                         .HasFilter("disbursed_at IS NOT NULL");
 
-                    b.HasIndex("LenderId");
+                    b.HasIndex("LenderId")
+                        .HasDatabaseName("ix_loans_lender_id");
 
-                    b.HasIndex("ClientId", "CreatedAt");
+                    b.HasIndex("ClientId", "CreatedAt")
+                        .HasDatabaseName("ix_loans_client_id_created_at");
 
                     b.ToTable("loans", "lending", t =>
                         {
@@ -204,9 +210,11 @@ namespace Lending.Persistence.Migrations
                                 .HasColumnName("due_date")
                                 .HasColumnOrder(2);
 
-                            b1.HasKey("LoanId", "Number");
+                            b1.HasKey("LoanId", "Number")
+                                .HasName("pk_installments");
 
-                            b1.HasIndex("LoanId", "DueDate");
+                            b1.HasIndex("LoanId", "DueDate")
+                                .HasDatabaseName("ix_installments_loan_id_due_date");
 
                             b1.ToTable("installments", "lending", t =>
                                 {
@@ -224,15 +232,18 @@ namespace Lending.Persistence.Migrations
                                 });
 
                             b1.WithOwner()
-                                .HasForeignKey("LoanId");
+                                .HasForeignKey("LoanId")
+                                .HasConstraintName("fk_installments_loans_loan_id");
 
                             b1.OwnsOne("Blocks.Domain.ValueObjects.Money", "Amount", b2 =>
                                 {
                                     b2.Property<Guid>("InstallmentLoanId")
-                                        .HasColumnType("uuid");
+                                        .HasColumnType("uuid")
+                                        .HasColumnName("loan_id");
 
                                     b2.Property<int>("InstallmentNumber")
-                                        .HasColumnType("integer");
+                                        .HasColumnType("integer")
+                                        .HasColumnName("number");
 
                                     b2.Property<decimal>("Amount")
                                         .HasPrecision(18, 2)
@@ -252,16 +263,19 @@ namespace Lending.Persistence.Migrations
                                     b2.ToTable("installments", "lending");
 
                                     b2.WithOwner()
-                                        .HasForeignKey("InstallmentLoanId", "InstallmentNumber");
+                                        .HasForeignKey("InstallmentLoanId", "InstallmentNumber")
+                                        .HasConstraintName("fk_installments_installments_loan_id_number");
                                 });
 
                             b1.OwnsOne("Blocks.Domain.ValueObjects.Money", "AmountPaid", b2 =>
                                 {
                                     b2.Property<Guid>("InstallmentLoanId")
-                                        .HasColumnType("uuid");
+                                        .HasColumnType("uuid")
+                                        .HasColumnName("loan_id");
 
                                     b2.Property<int>("InstallmentNumber")
-                                        .HasColumnType("integer");
+                                        .HasColumnType("integer")
+                                        .HasColumnName("number");
 
                                     b2.Property<decimal>("Amount")
                                         .ValueGeneratedOnAdd()
@@ -276,16 +290,19 @@ namespace Lending.Persistence.Migrations
                                     b2.ToTable("installments", "lending");
 
                                     b2.WithOwner()
-                                        .HasForeignKey("InstallmentLoanId", "InstallmentNumber");
+                                        .HasForeignKey("InstallmentLoanId", "InstallmentNumber")
+                                        .HasConstraintName("fk_installments_installments_loan_id_number");
                                 });
 
                             b1.OwnsOne("Blocks.Domain.ValueObjects.Money", "Interest", b2 =>
                                 {
                                     b2.Property<Guid>("InstallmentLoanId")
-                                        .HasColumnType("uuid");
+                                        .HasColumnType("uuid")
+                                        .HasColumnName("loan_id");
 
                                     b2.Property<int>("InstallmentNumber")
-                                        .HasColumnType("integer");
+                                        .HasColumnType("integer")
+                                        .HasColumnName("number");
 
                                     b2.Property<decimal>("Amount")
                                         .HasPrecision(18, 2)
@@ -298,16 +315,19 @@ namespace Lending.Persistence.Migrations
                                     b2.ToTable("installments", "lending");
 
                                     b2.WithOwner()
-                                        .HasForeignKey("InstallmentLoanId", "InstallmentNumber");
+                                        .HasForeignKey("InstallmentLoanId", "InstallmentNumber")
+                                        .HasConstraintName("fk_installments_installments_loan_id_number");
                                 });
 
                             b1.OwnsOne("Blocks.Domain.ValueObjects.Money", "Principal", b2 =>
                                 {
                                     b2.Property<Guid>("InstallmentLoanId")
-                                        .HasColumnType("uuid");
+                                        .HasColumnType("uuid")
+                                        .HasColumnName("loan_id");
 
                                     b2.Property<int>("InstallmentNumber")
-                                        .HasColumnType("integer");
+                                        .HasColumnType("integer")
+                                        .HasColumnName("number");
 
                                     b2.Property<decimal>("Amount")
                                         .HasPrecision(18, 2)
@@ -320,7 +340,8 @@ namespace Lending.Persistence.Migrations
                                     b2.ToTable("installments", "lending");
 
                                     b2.WithOwner()
-                                        .HasForeignKey("InstallmentLoanId", "InstallmentNumber");
+                                        .HasForeignKey("InstallmentLoanId", "InstallmentNumber")
+                                        .HasConstraintName("fk_installments_installments_loan_id_number");
                                 });
 
                             b1.Navigation("Amount")
@@ -363,13 +384,17 @@ namespace Lending.Persistence.Migrations
                                 .HasColumnName("loan_id")
                                 .HasColumnOrder(0);
 
-                            b1.HasKey("Id");
+                            b1.HasKey("Id")
+                                .HasName("pk_penalties");
 
-                            b1.HasIndex("AppliedAt");
+                            b1.HasIndex("AppliedAt")
+                                .HasDatabaseName("ix_penalties_applied_at");
 
-                            b1.HasIndex("InstallmentNumber");
+                            b1.HasIndex("InstallmentNumber")
+                                .HasDatabaseName("ix_penalties_installment_number");
 
-                            b1.HasIndex("LoanId");
+                            b1.HasIndex("LoanId")
+                                .HasDatabaseName("ix_penalties_loan_id");
 
                             b1.ToTable("penalties", "lending", t =>
                                 {
@@ -383,12 +408,14 @@ namespace Lending.Persistence.Migrations
                                 });
 
                             b1.WithOwner()
-                                .HasForeignKey("LoanId");
+                                .HasForeignKey("LoanId")
+                                .HasConstraintName("fk_penalties_loans_loan_id");
 
                             b1.OwnsOne("Blocks.Domain.ValueObjects.Money", "Amount", b2 =>
                                 {
                                     b2.Property<Guid>("PenaltyId")
-                                        .HasColumnType("uuid");
+                                        .HasColumnType("uuid")
+                                        .HasColumnName("id");
 
                                     b2.Property<decimal>("Amount")
                                         .HasPrecision(18, 2)
@@ -408,13 +435,15 @@ namespace Lending.Persistence.Migrations
                                     b2.ToTable("penalties", "lending");
 
                                     b2.WithOwner()
-                                        .HasForeignKey("PenaltyId");
+                                        .HasForeignKey("PenaltyId")
+                                        .HasConstraintName("fk_penalties_penalties_id");
                                 });
 
                             b1.OwnsOne("Blocks.Domain.ValueObjects.Money", "AmountPaid", b2 =>
                                 {
                                     b2.Property<Guid>("PenaltyId")
-                                        .HasColumnType("uuid");
+                                        .HasColumnType("uuid")
+                                        .HasColumnName("id");
 
                                     b2.Property<decimal>("Amount")
                                         .ValueGeneratedOnAdd()
@@ -429,7 +458,8 @@ namespace Lending.Persistence.Migrations
                                     b2.ToTable("penalties", "lending");
 
                                     b2.WithOwner()
-                                        .HasForeignKey("PenaltyId");
+                                        .HasForeignKey("PenaltyId")
+                                        .HasConstraintName("fk_penalties_penalties_id");
                                 });
 
                             b1.Navigation("Amount")

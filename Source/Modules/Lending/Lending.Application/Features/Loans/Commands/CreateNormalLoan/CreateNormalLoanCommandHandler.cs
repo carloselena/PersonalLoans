@@ -1,6 +1,7 @@
 ﻿using Blocks.Domain.Abstractions;
 using Blocks.Domain.ValueObjects;
 using Lending.Application.Common.Mappings;
+using Lending.Domain;
 using Lending.Domain.Loans;
 using Lending.Domain.Loans.ValueObjects;
 using MediatR;
@@ -10,9 +11,9 @@ namespace Lending.Application.Features.Loans.Commands.CreateNormalLoan;
 public class CreateNormalLoanCommandHandler : IRequestHandler<CreateNormalLoanCommand, Guid>
 {
     private readonly ILoanRepository _loanRepository;
-    private readonly IUnitOfWork _unitOfWork;
+    private readonly ILendingUnitOfWork _unitOfWork;
 
-    public CreateNormalLoanCommandHandler(ILoanRepository loanRepository, IUnitOfWork unitOfWork)
+    public CreateNormalLoanCommandHandler(ILoanRepository loanRepository, ILendingUnitOfWork unitOfWork)
     {
         _loanRepository = loanRepository;
         _unitOfWork = unitOfWork;
