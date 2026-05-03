@@ -1,22 +1,23 @@
-﻿using System.Text.Json;
-using Blocks.Application.Exceptions;
+﻿using Blocks.Application.Exceptions;
 using Blocks.Domain.Time;
 using Blocks.IntegrationEvents;
 using Identity.Application.Abstractions;
 using Identity.Application.Exceptions;
 using Identity.Application.Features.Auth.Dtos;
 using Identity.Application.Options;
-using Identity.Application.Outbox;
 using Identity.Domain.Users;
+using MassTransit;
 using MediatR;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.Options;
 
 namespace Identity.Application.Features.Auth.Commands.Register;
 
-public class RegisterCommandHandler(UserManager<User> userManager,
+public class RegisterCommandHandler(
+    UserManager<User> userManager,
     IIdentityDbContext dbContext,
     IJwtService jwtService,
+    IPublishEndpoint publishEndpoint,
     IOptions<JwtOptions> jwtOptions) : IRequestHandler<RegisterCommand, TokenDto>
 {
     private readonly JwtOptions _jwtOptions = jwtOptions.Value;
@@ -27,7 +28,8 @@ public class RegisterCommandHandler(UserManager<User> userManager,
         if (existing is not null)
             throw new ConflictException("El correo ya está registrado");
 
-        await using var transaction = await dbContext.Database.BeginTransactionAsync(cancellationToken);
+        await using var transaction = await dbContext.Database
+            .BeginTransactionAsync(cancellationToken);
         try
         {
             var user = User.Create(command.Email);
@@ -43,10 +45,7 @@ public class RegisterCommandHandler(UserManager<User> userManager,
                 user.Id,
                 DateProvider.UtcNow());
             
-            dbContext.OutboxMessages.Add(new OutboxMessage(
-                type: typeof(UserCreatedIntegrationEvent).FullName!,
-                payload: JsonSerializer.Serialize(integrationEvent)
-            ));
+            await publishEndpoint.Publish(integrationEvent, cancellationToken);
 
             await dbContext.SaveChangesAsync(cancellationToken);
             await transaction.CommitAsync(cancellationToken);

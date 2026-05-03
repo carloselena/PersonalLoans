@@ -2,6 +2,7 @@ using Accounts.Presentation;
 using Identity.Presentation;
 using Identity.Presentation.Endpoints;
 using Lending.Presentation;
+using MassTransit;
 using PersonalLoans.Api.Infrastructure.Authentication;
 using PersonalLoans.Api.Infrastructure.ExceptionHandling;
 
@@ -16,7 +17,6 @@ builder.Services.AddProblemDetails();
 builder.Services.AddIdentityModule(builder.Configuration);
 builder.Services.AddAccountsModule(builder.Configuration);
 builder.Services.AddLendingModule(builder.Configuration);
-
 
 builder.Services.AddAuthorization();
 builder.Services.AddCurrentUser();

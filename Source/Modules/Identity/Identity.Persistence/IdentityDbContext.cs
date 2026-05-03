@@ -1,5 +1,5 @@
-﻿using Identity.Application.Outbox;
-using Identity.Domain.Users;
+﻿using Identity.Domain.Users;
+using MassTransit;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
@@ -9,7 +9,6 @@ namespace Identity.Persistence;
 public class IdentityDbContext(DbContextOptions<IdentityDbContext> options) 
     : IdentityDbContext<User, IdentityRole<Guid>, Guid>(options)
 {
-    public DbSet<OutboxMessage> OutboxMessages { get; set; }
     
     protected override void OnModelCreating(ModelBuilder builder)
     {
@@ -25,5 +24,9 @@ public class IdentityDbContext(DbContextOptions<IdentityDbContext> options)
         builder.Entity<IdentityRoleClaim<Guid>>().ToTable("role_claims");
         
         builder.ApplyConfigurationsFromAssembly(GetType().Assembly);
+        
+        builder.AddInboxStateEntity();
+        builder.AddOutboxMessageEntity();
+        builder.AddOutboxStateEntity();
     }
 }
