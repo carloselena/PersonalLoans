@@ -1,6 +1,6 @@
 ﻿using Identity.Application;
 using Identity.Persistence;
-using Identity.Presentation.Jobs;
+using MassTransit;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 
@@ -12,8 +12,26 @@ public static class ServiceRegistration
     {
         services.AddIdentityApplicationServices(configuration)
             .AddIdentityPersistenceServices(configuration);
-        
-        services.AddHostedService<OutboxProcessorJob>();
+
+        services.AddMassTransit(x =>
+        {
+            x.AddEntityFrameworkOutbox<IdentityDbContext>(o =>
+            {
+                o.UsePostgres();
+                o.UseBusOutbox();
+            });
+            
+            x.UsingRabbitMq((ctx, cfg) =>
+            {
+                cfg.Host(configuration["RabbitMq:Host"], h =>
+                {
+                    h.Username(configuration["RabbitMq:Username"]!);
+                    h.Password(configuration["RabbitMq:Password"]!);
+                });
+                
+                cfg.ConfigureEndpoints(ctx);
+            });
+        });
 
         return services;
     }
