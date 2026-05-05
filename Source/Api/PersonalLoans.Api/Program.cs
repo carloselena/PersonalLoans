@@ -1,10 +1,13 @@
+using Accounts.Application.DependencyInjection;
 using Accounts.Presentation;
+using Identity.Application.DependencyInjection;
 using Identity.Presentation;
 using Identity.Presentation.Endpoints;
 using Lending.Presentation;
 using MassTransit;
 using PersonalLoans.Api.Infrastructure.Authentication;
 using PersonalLoans.Api.Infrastructure.ExceptionHandling;
+using PersonalLoans.Api.Infrastructure.Messaging;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -23,19 +26,13 @@ builder.Services.AddLendingModule(builder.Configuration);
 builder.Services.AddCurrentUser();
 
 // Messaging Infrastructure
-builder.Services.AddMassTransit(x =>
-{
-    x.UsingRabbitMq((ctx, cfg) =>
-    {
-        cfg.Host(builder.Configuration["RabbitMq:Host"], h =>
-        {
-            h.Username(builder.Configuration["RabbitMq:Username"]!);
-            h.Password(builder.Configuration["RabbitMq:Password"]!);
-        });
-
-        cfg.ConfigureEndpoints(ctx);
-    });
-});
+builder.Services.AddMassTransitModules(
+    builder.Configuration,
+    assemblies:
+    [
+        typeof(IdentityMassTransitModule).Assembly,
+        typeof(AccountsMassTransitModule).Assembly
+    ]);
 
 
 var app = builder.Build();

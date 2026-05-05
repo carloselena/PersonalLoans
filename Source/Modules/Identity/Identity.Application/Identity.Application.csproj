@@ -10,6 +10,7 @@
       <ProjectReference Include="..\..\..\BuildingBlocks\Blocks.Application\Blocks.Application.csproj" />
       <ProjectReference Include="..\..\..\BuildingBlocks\Blocks.IntegrationEvents\Blocks.IntegrationEvents.csproj" />
       <ProjectReference Include="..\..\..\BuildingBlocks\Blocks.MassTransit\Blocks.MassTransit.csproj" />
+      <ProjectReference Include="..\..\Accounts\Accounts.Domain\Accounts.Domain.csproj" />
       <ProjectReference Include="..\Identity.Domain\Identity.Domain.csproj" />
     </ItemGroup>
 

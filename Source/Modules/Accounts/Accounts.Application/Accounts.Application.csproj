@@ -1,0 +1,15 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+    <PropertyGroup>
+        <TargetFramework>net10.0</TargetFramework>
+        <ImplicitUsings>enable</ImplicitUsings>
+        <Nullable>enable</Nullable>
+    </PropertyGroup>
+
+    <ItemGroup>
+      <ProjectReference Include="..\..\..\BuildingBlocks\Blocks.IntegrationEvents\Blocks.IntegrationEvents.csproj" />
+      <ProjectReference Include="..\..\..\BuildingBlocks\Blocks.MassTransit\Blocks.MassTransit.csproj" />
+      <ProjectReference Include="..\Accounts.Domain\Accounts.Domain.csproj" />
+    </ItemGroup>
+
+</Project>

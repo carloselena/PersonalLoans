@@ -56,6 +56,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Blocks.IntegrationEvents", 
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Blocks.MassTransit", "Source\BuildingBlocks\Blocks.MassTransit\Blocks.MassTransit.csproj", "{FCEB2E07-71DE-4710-AFDC-3B0E4C868C7C}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Accounts.Application", "Source\Modules\Accounts\Accounts.Application\Accounts.Application.csproj", "{A0C63B46-A010-47AC-98D2-44534C54DDCC}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -88,6 +90,7 @@ Global
 		{B28E7C66-1BA8-4FA5-BBEE-F1FEE3E328AC} = {5EF2F3FE-CFE2-40BD-9733-6E9833A65F36}
 		{CE2BAD42-36AE-4D52-8184-EA390FF0B413} = {6204FF91-E52A-4A9F-B2A8-118E30C68228}
 		{FCEB2E07-71DE-4710-AFDC-3B0E4C868C7C} = {6204FF91-E52A-4A9F-B2A8-118E30C68228}
+		{A0C63B46-A010-47AC-98D2-44534C54DDCC} = {5EF2F3FE-CFE2-40BD-9733-6E9833A65F36}
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
 		{5D5A65C9-9B08-4423-AB34-4C8C7B3C790C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
@@ -162,5 +165,9 @@ Global
 		{FCEB2E07-71DE-4710-AFDC-3B0E4C868C7C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{FCEB2E07-71DE-4710-AFDC-3B0E4C868C7C}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{FCEB2E07-71DE-4710-AFDC-3B0E4C868C7C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A0C63B46-A010-47AC-98D2-44534C54DDCC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A0C63B46-A010-47AC-98D2-44534C54DDCC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A0C63B46-A010-47AC-98D2-44534C54DDCC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A0C63B46-A010-47AC-98D2-44534C54DDCC}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal
