@@ -2,6 +2,7 @@
 using System.Security.Claims;
 using System.Security.Cryptography;
 using System.Text;
+using Blocks.Application.Security;
 using Identity.Application.Options;
 using Identity.Domain.Users;
 using Microsoft.Extensions.Options;
@@ -26,7 +27,7 @@ public class JwtService(IOptions<JwtOptions> jwtOptions) : IJwtService
         };
         
         if (lenderId.HasValue)
-            claims.Add(new Claim("lender_id", lenderId.Value.ToString())); // todo - use CustomClaims.LenderId
+            claims.Add(new Claim(CustomClaims.LenderId, lenderId.Value.ToString()));
 
         var token = new JwtSecurityToken(
             issuer: _jwtOptions.Issuer,
