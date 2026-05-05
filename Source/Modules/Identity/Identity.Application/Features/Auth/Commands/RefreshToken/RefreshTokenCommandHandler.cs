@@ -1,4 +1,5 @@
-﻿using Blocks.Application.Exceptions;
+﻿using Accounts.Domain.Lenders;
+using Blocks.Application.Exceptions;
 using Blocks.Domain.Time;
 using Identity.Application.Features.Auth.Dtos;
 using Identity.Application.Options;
@@ -13,6 +14,7 @@ namespace Identity.Application.Features.Auth.Commands.RefreshToken;
 public class RefreshTokenCommandHandler(
     UserManager<User> userManager,
     IJwtService jwtService,
+    ILenderRepository lenderRepository,
     IOptions<JwtOptions> jwtOptions) : IRequestHandler<RefreshTokenCommand, TokenDto>
 {
     private readonly JwtOptions _jwtOptions = jwtOptions.Value;
@@ -34,8 +36,10 @@ public class RefreshTokenCommandHandler(
             throw new UnauthorizedException("Refresh token inválido o expirado");
         
         user.RevokeRefreshToken(storedToken.TokenHash, DateProvider.UtcNow());
+        
+        var lender = await lenderRepository.GetByUserIdAsync(user.Id, cancellationToken);
 
-        var tokens = TokenFactory.Issue(user, jwtService, _jwtOptions.RefreshTokenValidForInDays);
+        var tokens = TokenFactory.Issue(user, jwtService, _jwtOptions.RefreshTokenValidForInDays, lender?.Id);
         await userManager.UpdateAsync(user);
 
         return new TokenDto(tokens.AccessToken, tokens.RawRefreshToken);
