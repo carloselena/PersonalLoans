@@ -1,5 +1,4 @@
-﻿using Blocks.Domain.Exceptions;
-using Blocks.Domain.Guards;
+﻿using Blocks.Domain.Guards;
 
 namespace Identity.Domain.Users;
 

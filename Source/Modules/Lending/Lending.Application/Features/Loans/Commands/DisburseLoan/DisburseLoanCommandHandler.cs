@@ -1,9 +1,7 @@
 ﻿using Blocks.Application.Abstractions;
 using Blocks.Application.Exceptions;
-using Blocks.Domain.Abstractions;
 using Blocks.Domain.Time;
 using Lending.Application.Features.Loans.Dtos;
-using Lending.Application.Features.Loans.Queries;
 using Lending.Domain;
 using Lending.Domain.Loans;
 using MediatR;

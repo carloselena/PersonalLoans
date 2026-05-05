@@ -1,5 +1,4 @@
-﻿using Blocks.Domain.Abstractions;
-using Blocks.EntityFramework;
+﻿using Blocks.EntityFramework;
 using Lending.Domain;
 
 namespace Lending.Persistence;

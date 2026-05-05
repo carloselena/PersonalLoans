@@ -1,6 +1,5 @@
 ﻿using Blocks.Application.Exceptions;
 using Blocks.Domain.Abstractions;
-using Blocks.Domain.Exceptions;
 
 namespace Blocks.EntityFramework;
 

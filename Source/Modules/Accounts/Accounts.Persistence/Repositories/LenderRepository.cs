@@ -1,5 +1,4 @@
 ﻿using Accounts.Domain.Lenders;
-using Blocks.EntityFramework;
 using Microsoft.EntityFrameworkCore;
 
 namespace Accounts.Persistence.Repositories;

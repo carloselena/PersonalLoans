@@ -1,5 +1,4 @@
-﻿using Blocks.Domain.Abstractions;
-using Blocks.Domain.ValueObjects;
+﻿using Blocks.Domain.ValueObjects;
 using Lending.Application.Common.Mappings;
 using Lending.Domain;
 using Lending.Domain.Loans;

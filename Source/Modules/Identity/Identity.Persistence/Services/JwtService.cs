@@ -26,7 +26,7 @@ public class JwtService(IOptions<JwtOptions> jwtOptions) : IJwtService
         };
         
         if (lenderId.HasValue)
-            claims.Add(new Claim("lender_id", lenderId.Value.ToString()));
+            claims.Add(new Claim("lender_id", lenderId.Value.ToString())); // todo - use CustomClaims.LenderId
 
         var token = new JwtSecurityToken(
             issuer: _jwtOptions.Issuer,

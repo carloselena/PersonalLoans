@@ -1,7 +1,5 @@
 ﻿using Blocks.Domain.Time;
-using Identity.Application.Options;
 using Identity.Domain.Users;
-using Microsoft.Extensions.Options;
 
 namespace Identity.Application.Features.Auth;
 

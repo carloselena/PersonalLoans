@@ -1,6 +1,5 @@
 ﻿using Identity.Application.DependencyInjection;
 using Identity.Persistence;
-using MassTransit;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 
