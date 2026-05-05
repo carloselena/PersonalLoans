@@ -1,4 +1,5 @@
 ﻿using System.Reflection;
+using System.Security.Authentication;
 using Blocks.MassTransit;
 using MassTransit;
 
@@ -25,10 +26,11 @@ public static class MassTransitExtensions
             {
                 var rabbit = configuration.GetSection("RabbitMQ");
                 
-                cfg.Host(rabbit["Host"], rabbit["VHost"], rabbit["UseSsl"], h =>
+                cfg.Host(rabbit["Host"], rabbit["VHost"],h =>
                 {
                     h.Username(rabbit["Username"]!);
                     h.Password(rabbit["Password"]!);
+                    h.UseSsl(s => s.Protocol = SslProtocols.Tls12);
                 });
                 
                 cfg.ConfigureEndpoints(context);
