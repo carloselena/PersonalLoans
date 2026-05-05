@@ -16,6 +16,7 @@
     </ItemGroup>
 
     <ItemGroup>
+      <ProjectReference Include="..\..\BuildingBlocks\Blocks.MassTransit\Blocks.MassTransit.csproj" />
       <ProjectReference Include="..\..\Modules\Accounts\Accounts.Presentation\Accounts.Presentation.csproj" />
       <ProjectReference Include="..\..\Modules\Identity\Identity.Presentation\Identity.Presentation.csproj" />
       <ProjectReference Include="..\..\Modules\Lending\Lending.Presentation\Lending.Presentation.csproj" />

@@ -3,7 +3,7 @@ using Identity.Application.Options;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 
-namespace Identity.Application;
+namespace Identity.Application.DependencyInjection;
 
 public static class ServiceRegistration
 {

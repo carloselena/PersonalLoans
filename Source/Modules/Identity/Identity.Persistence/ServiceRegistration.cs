@@ -1,4 +1,5 @@
 ﻿using System.Text;
+using Identity.Application.Abstractions;
 using Identity.Application.Options;
 using Identity.Domain;
 using Identity.Domain.Users;
@@ -25,6 +26,8 @@ public static class ServiceRegistration
                 .UseSnakeCaseNamingConvention();
             }
         );
+
+        services.AddScoped<IIdentityDbContext, IdentityDbContext>();
             
 
         services.AddIdentityCore<User>(options =>
@@ -57,6 +60,8 @@ public static class ServiceRegistration
                     ClockSkew = TimeSpan.Zero
                 };
             });
+        
+        services.AddAuthorization();
 
         return services;
     }

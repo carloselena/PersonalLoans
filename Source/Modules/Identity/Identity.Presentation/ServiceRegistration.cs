@@ -1,4 +1,4 @@
-﻿using Identity.Application;
+﻿using Identity.Application.DependencyInjection;
 using Identity.Persistence;
 using MassTransit;
 using Microsoft.Extensions.Configuration;
@@ -12,27 +12,7 @@ public static class ServiceRegistration
     {
         services.AddIdentityApplicationServices(configuration)
             .AddIdentityPersistenceServices(configuration);
-
-        services.AddMassTransit(x =>
-        {
-            x.AddEntityFrameworkOutbox<IdentityDbContext>(o =>
-            {
-                o.UsePostgres();
-                o.UseBusOutbox();
-            });
-            
-            x.UsingRabbitMq((ctx, cfg) =>
-            {
-                cfg.Host(configuration["RabbitMq:Host"], h =>
-                {
-                    h.Username(configuration["RabbitMq:Username"]!);
-                    h.Password(configuration["RabbitMq:Password"]!);
-                });
-                
-                cfg.ConfigureEndpoints(ctx);
-            });
-        });
-
+        
         return services;
     }
 }

@@ -14,12 +14,29 @@ builder.Services.AddOpenApi();
 builder.Services.AddExceptionHandler<GlobalExceptionHandler>();
 builder.Services.AddProblemDetails();
 
+// Modules
 builder.Services.AddIdentityModule(builder.Configuration);
 builder.Services.AddAccountsModule(builder.Configuration);
 builder.Services.AddLendingModule(builder.Configuration);
 
-builder.Services.AddAuthorization();
+// Authentication
 builder.Services.AddCurrentUser();
+
+// Messaging Infrastructure
+builder.Services.AddMassTransit(x =>
+{
+    x.UsingRabbitMq((ctx, cfg) =>
+    {
+        cfg.Host(builder.Configuration["RabbitMq:Host"], h =>
+        {
+            h.Username(builder.Configuration["RabbitMq:Username"]!);
+            h.Password(builder.Configuration["RabbitMq:Password"]!);
+        });
+
+        cfg.ConfigureEndpoints(ctx);
+    });
+});
+
 
 var app = builder.Build();
 

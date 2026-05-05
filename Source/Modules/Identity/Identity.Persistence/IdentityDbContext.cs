@@ -1,4 +1,5 @@
-﻿using Identity.Domain.Users;
+﻿using Identity.Application.Abstractions;
+using Identity.Domain.Users;
 using MassTransit;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
@@ -7,7 +8,7 @@ using Microsoft.EntityFrameworkCore;
 namespace Identity.Persistence;
 
 public class IdentityDbContext(DbContextOptions<IdentityDbContext> options) 
-    : IdentityDbContext<User, IdentityRole<Guid>, Guid>(options)
+    : IdentityDbContext<User, IdentityRole<Guid>, Guid>(options), IIdentityDbContext
 {
     
     protected override void OnModelCreating(ModelBuilder builder)
