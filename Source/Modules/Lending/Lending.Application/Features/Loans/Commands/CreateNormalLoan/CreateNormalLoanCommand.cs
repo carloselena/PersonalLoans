@@ -1,5 +1,5 @@
 ﻿using Blocks.Domain.Enums;
-using Lending.Domain.Loans;
+using Lending.Domain.Loans.Enums;
 using Lending.Domain.Loans.ValueObjects;
 using MediatR;
 

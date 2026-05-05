@@ -1,4 +1,5 @@
 ﻿using Lending.Domain.Loans;
+using Lending.Domain.Loans.Enums;
 using Lending.Persistence.Queries;
 using Microsoft.EntityFrameworkCore;
 

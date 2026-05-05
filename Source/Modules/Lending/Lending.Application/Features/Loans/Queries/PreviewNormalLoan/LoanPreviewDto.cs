@@ -1,5 +1,5 @@
 ﻿using Blocks.Domain.Enums;
-using Lending.Domain.Loans;
+using Lending.Domain.Loans.Enums;
 
 namespace Lending.Application.Features.Loans.Queries.PreviewNormalLoan;
 

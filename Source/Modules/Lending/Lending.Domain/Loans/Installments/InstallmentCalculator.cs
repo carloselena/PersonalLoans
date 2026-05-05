@@ -1,4 +1,5 @@
 ﻿using Blocks.Domain.ValueObjects;
+using Lending.Domain.Loans.Enums;
 using Lending.Domain.Loans.ValueObjects;
 
 namespace Lending.Domain.Loans.Installments;

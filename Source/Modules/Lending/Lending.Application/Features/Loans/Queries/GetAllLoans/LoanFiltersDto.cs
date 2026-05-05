@@ -1,4 +1,4 @@
-﻿using Lending.Domain.Loans;
+﻿using Lending.Domain.Loans.Enums;
 
 namespace Lending.Application.Features.Loans.Queries.GetAllLoans;
 

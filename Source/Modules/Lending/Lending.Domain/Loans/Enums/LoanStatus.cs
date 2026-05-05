@@ -1,4 +1,4 @@
-﻿namespace Lending.Domain.Loans;
+﻿namespace Lending.Domain.Loans.Enums;
 
 public enum LoanStatus
 {
