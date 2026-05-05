@@ -9,10 +9,13 @@
     <ItemGroup>
       <ProjectReference Include="..\..\..\BuildingBlocks\Blocks.Application\Blocks.Application.csproj" />
       <ProjectReference Include="..\..\..\BuildingBlocks\Blocks.IntegrationEvents\Blocks.IntegrationEvents.csproj" />
+      <ProjectReference Include="..\..\..\BuildingBlocks\Blocks.MassTransit\Blocks.MassTransit.csproj" />
       <ProjectReference Include="..\Identity.Domain\Identity.Domain.csproj" />
     </ItemGroup>
 
     <ItemGroup>
+      <PackageReference Include="MassTransit" Version="9.1.0" />
+      <PackageReference Include="MassTransit.EntityFrameworkCore" Version="9.1.0" />
       <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="10.0.7" />
     </ItemGroup>
 
