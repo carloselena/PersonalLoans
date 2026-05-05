@@ -13,17 +13,20 @@ namespace Identity.Persistence.Services;
 public class JwtService(IOptions<JwtOptions> jwtOptions) : IJwtService
 {
     private readonly JwtOptions _jwtOptions = jwtOptions.Value;
-    public string GenerateAccessToken(User user)
+    public string GenerateAccessToken(User user, Guid? lenderId = null)
     {
         var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_jwtOptions.SecretKey));
         var credentials = new SigningCredentials(key, SecurityAlgorithms.HmacSha256);
 
-        var claims = new[]
+        var claims = new List<Claim>
         {
-            new Claim(JwtRegisteredClaimNames.Sub, user.Id.ToString()),
-            new Claim(JwtRegisteredClaimNames.Email, user.Email!),
-            new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString())
+            new(JwtRegisteredClaimNames.Sub, user.Id.ToString()),
+            new(JwtRegisteredClaimNames.Email, user.Email!),
+            new(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString())
         };
+        
+        if (lenderId.HasValue)
+            claims.Add(new Claim("lender_id", lenderId.Value.ToString()));
 
         var token = new JwtSecurityToken(
             issuer: _jwtOptions.Issuer,

@@ -7,9 +7,9 @@ namespace Identity.Application.Features.Auth;
 
 internal static class TokenFactory
 {
-    internal static TokenResult Issue(User user, IJwtService jwtService, int refreshTokenValidForInDays)
+    internal static TokenResult Issue(User user, IJwtService jwtService, int refreshTokenValidForInDays, Guid? lenderId = null)
     {
-        var accessToken = jwtService.GenerateAccessToken(user);
+        var accessToken = jwtService.GenerateAccessToken(user, lenderId);
         var rawRefreshToken = jwtService.GenerateRefreshToken();
         
         user.AddRefreshToken(

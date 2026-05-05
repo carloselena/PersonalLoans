@@ -1,8 +1,6 @@
 ﻿using Blocks.MassTransit;
 using MassTransit;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
-using Microsoft.Extensions.Configuration;
-using Microsoft.Extensions.DependencyInjection;
 
 namespace Identity.Application.DependencyInjection;
 
