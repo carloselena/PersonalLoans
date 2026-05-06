@@ -3,7 +3,7 @@ using Blocks.Domain.Abstractions;
 
 namespace Blocks.EntityFramework;
 
-public static class RepositoryExtensions
+public static class RepositoryExtensions // todo - analyze whether this should be removed
 {
     public static async Task<TEntity> FindByIdOrThrowAsync<TEntity>(
         this IGenericRepository<TEntity> repository, Guid id, string propertyName,
