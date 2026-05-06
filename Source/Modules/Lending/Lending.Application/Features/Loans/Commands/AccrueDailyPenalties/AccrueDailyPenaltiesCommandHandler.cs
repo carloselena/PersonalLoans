@@ -1,5 +1,4 @@
-﻿using Blocks.Domain.Abstractions;
-using Blocks.Domain.Time;
+﻿using Blocks.Domain.Time;
 using Lending.Domain;
 using Lending.Domain.Loans;
 using MediatR;

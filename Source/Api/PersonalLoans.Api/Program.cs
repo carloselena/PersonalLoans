@@ -4,7 +4,6 @@ using Identity.Application.DependencyInjection;
 using Identity.Presentation;
 using Identity.Presentation.Endpoints;
 using Lending.Presentation;
-using MassTransit;
 using PersonalLoans.Api.Infrastructure.Authentication;
 using PersonalLoans.Api.Infrastructure.ExceptionHandling;
 using PersonalLoans.Api.Infrastructure.Messaging;
@@ -33,7 +32,6 @@ builder.Services.AddMassTransitModules(
         typeof(IdentityMassTransitModule).Assembly,
         typeof(AccountsMassTransitModule).Assembly
     ]);
-
 
 var app = builder.Build();
 

@@ -1,5 +1,6 @@
 ﻿using Blocks.Domain.Exceptions;
 using Blocks.Domain.Guards;
+using Lending.Domain.Loans.Enums;
 
 namespace Lending.Domain.Loans.ValueObjects;
 

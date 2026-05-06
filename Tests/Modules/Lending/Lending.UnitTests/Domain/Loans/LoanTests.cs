@@ -3,6 +3,7 @@ using Blocks.Domain.Exceptions;
 using Blocks.Domain.Time;
 using Blocks.Domain.ValueObjects;
 using Lending.Domain.Loans;
+using Lending.Domain.Loans.Enums;
 using Lending.Domain.Loans.Installments;
 using Lending.Domain.Loans.ValueObjects;
 

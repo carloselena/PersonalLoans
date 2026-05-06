@@ -1,5 +1,4 @@
 ﻿using MassTransit;
-using Microsoft.Extensions.DependencyInjection;
 
 namespace Blocks.MassTransit;
 

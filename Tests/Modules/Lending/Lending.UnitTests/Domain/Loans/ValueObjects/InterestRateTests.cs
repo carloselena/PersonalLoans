@@ -1,5 +1,5 @@
 ﻿using Blocks.Domain.Exceptions;
-using Lending.Domain.Loans;
+using Lending.Domain.Loans.Enums;
 using Lending.Domain.Loans.ValueObjects;
 
 namespace Lending.UnitTests.Domain.Loans.ValueObjects;

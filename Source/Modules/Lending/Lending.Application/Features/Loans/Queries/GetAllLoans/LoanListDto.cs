@@ -1,5 +1,6 @@
 ﻿using Blocks.Domain.Enums;
 using Lending.Domain.Loans;
+using Lending.Domain.Loans.Enums;
 using Lending.Domain.Loans.ValueObjects;
 
 namespace Lending.Application.Features.Loans.Queries.GetAllLoans;

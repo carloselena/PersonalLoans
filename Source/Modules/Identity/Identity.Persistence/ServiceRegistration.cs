@@ -1,7 +1,6 @@
 ﻿using System.Text;
 using Identity.Application.Abstractions;
 using Identity.Application.Options;
-using Identity.Domain;
 using Identity.Domain.Users;
 using Identity.Persistence.Services;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
